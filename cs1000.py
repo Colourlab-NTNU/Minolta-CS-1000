@@ -26,13 +26,15 @@ class CS1000:
     """
     Class for managing the Minolta CS-1000.
     """
-    def __init__(self):
+    def __init__(self, port=None, baud_rate=19200):
         """
         Create CS1000 instance and connect if port is given.
         """
         self.results = dict()
         self.com = None
         self.remote = False
+        if port:
+            self.connect(port, baud_rate)
     
     def get_connected(self):
         """
