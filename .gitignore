@@ -1,2 +1,10 @@
+.project
+.pydevproject
+.settings
+.project
+.pydevprocect
+.settings
+doc
 *.csv
-doc/
+__pycache__
+*.pyc
