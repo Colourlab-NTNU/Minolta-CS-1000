@@ -27,7 +27,7 @@ class CS1000:
     """
     Class for managing the Minolta CS-1000.
     """
-    def __init__(self, port=None, baud_rate=19200, loglevel=logging.DEBUG):
+    def __init__(self, port=None, baud_rate=19200, loglevel=logging.INFO):
         """
         Create CS1000 instance and connect if port is given.
         """
