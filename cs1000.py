@@ -70,13 +70,13 @@ class CS1000:
         """
         if on:
             if not self.remote:
-                self.com.write('RMT,1\n')
-                ans = self.com.readline()
+                self.com.write(b'RMT,1\n')
+                ans = self.com.readline().decode('utf-8')
                 print('RMT,1: ' + ans.strip())
                 self.remote = True
         else:
             if self.remote:
-                self.com.write('RMT,0\n')
+                self.com.write(b'RMT,0\n')
                 self.remote = False
                 self.com = serial.Serial()
 
@@ -86,16 +86,16 @@ class CS1000:
         """
         if not self.remote:
             self.set_remote(True)
-        self.com.write('MES,1\n')
-        ans = self.com.readline()
+        self.com.write(b'MES,1\n')
+        ans = self.com.readline().decode('utf-8')
         print('MES,1: ' + ans.strip())
-        ans = self.com.readline()
-        print ('Result: ' + ans.strip())
-        self.com.write('BDR,1,0,0\n')
-        ans = self.com.readline()
+        ans = self.com.readline().decode('utf-8')
+        print('Result: ' + ans.strip())
+        self.com.write(b'BDR,1,0,0\n')
+        ans = self.com.readline().decode('utf-8')
         print('BDR,1,0,0: ' + ans.strip())
-        self.com.write('&\n')
-        ans = self.com.readline()
+        self.com.write(b'&\n')
+        ans = self.com.readline().decode('utf-8')
         ans = ans.split(',')
         self.results['Le2'] = float(ans[0])
         self.results['Lv2'] = float(ans[1])
@@ -108,11 +108,11 @@ class CS1000:
         self.results['v2'] = float(ans[8])
         self.results['T2'] = ans[9]
         self.results['Duv2'] = ans[8]
-        self.com.write('BDR,1,1,0\n')
-        ans = self.com.readline()
+        self.com.write(b'BDR,1,1,0\n')
+        ans = self.com.readline().decode('utf-8')
         print('BDR,1,1,0: ' + ans.strip())
-        self.com.write('&\n')
-        ans = self.com.readline()
+        self.com.write(b'&\n')
+        ans = self.com.readline().decode('utf-8')
         ans = ans.split(',')
         self.results['Le10'] = float(ans[0])
         self.results['Lv10'] = float(ans[1])
@@ -125,13 +125,13 @@ class CS1000:
         self.results['v10'] = float(ans[8])
         self.results['T10'] = ans[9]
         self.results['Duv10'] = ans[8]
-        self.com.write('BDR,0,0,0\n')
-        ans = self.com.readline()
+        self.com.write(b'BDR,0,0,0\n')
+        ans = self.com.readline().decode('utf-8')
         print('BDR,0,0,0: ' + ans.strip())
         spectrum = []
         for i in range(15):
-            self.com.write('&\n')
-            ans = self.com.readline()
+            self.com.write(b'&\n')
+            ans = self.com.readline().decode('utf-8')
             ans = ans.split(',')
             for a in ans:
                 spectrum.append(float(a.strip()))
@@ -140,6 +140,9 @@ class CS1000:
         spectrum = np.array([lambd, spectrum]).T
         self.results['spectrum'] = np.array(spectrum)
         print('Result: OK')
-    
+
     def get_results(self):
+        """
+        Pass the results as a dict().
+        """
         return self.results

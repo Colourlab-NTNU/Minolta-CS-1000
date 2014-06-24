@@ -188,17 +188,17 @@ You should have received a copy of the GNU General Public License along with thi
     
     def on_connect(self):
         if self.connect_check.isChecked():
-            print 'Connecting'
+            print('Connecting')
             port = str(self.port_text.text())
             if port == '':
                 port = 0
             baud = int(self.baud_combo.currentText())
-            print port, type(port)
-            print baud, type(baud)
+            print(port, type(port))
+            print(baud, type(baud))
             self.cs.connect(port, baud)
             self.cs.set_remote(True)
         else:
-            print 'Disconnecting'
+            print('Disconnecting')
             self.cs.set_remote(False)
             self.cs.disconnect()
     
@@ -212,7 +212,7 @@ You should have received a copy of the GNU General Public License along with thi
     
     def on_close(self):
         if self.connect_check.isChecked():
-            print 'Disconnecting'   
+            print('Disconnecting')   
             self.cs.set_remote(False)
         self.close()
 
