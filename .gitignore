@@ -8,3 +8,4 @@ doc
 *.csv
 __pycache__
 *.pyc
+*~
