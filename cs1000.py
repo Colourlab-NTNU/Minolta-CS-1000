@@ -23,6 +23,7 @@ import serial
 import logging
 import numpy as np
 
+
 class CS1000:
     """
     Class for managing the Minolta CS-1000.
@@ -38,18 +39,18 @@ class CS1000:
             self.connect(port, baud_rate)
         logging.basicConfig(format='%(asctime)s %(levelname)s: %(message)s',
                             level=loglevel)
-    
+
     def get_connected(self):
         """
         Is the CS1000 connected?
         """
-        return not self.com == None
+        return not self.com is None
 
     def connect(self, port, baud_rate=19200):
         """
-        Connect to the given serial port. 
+        Connect to the given serial port.
         """
-        if self.remote: # Turn off remote control if on.
+        if self.remote:         # Turn off remote control if on.
             self.set_remote(False)
         self.com = serial.Serial(port, baudrate=baud_rate)
         logging.info('Connected to port ' + str(port) +
@@ -59,7 +60,7 @@ class CS1000:
         """
         Disconnect from the serial port.
         """
-        if self.remote: # Turn off remote control if on.
+        if self.remote:         # Turn off remote control if on.
             self.set_remote(False)
         self.com = None
         logging.info('Disconnected')
@@ -68,7 +69,7 @@ class CS1000:
         """
         Is remote control on?
         """
-        return self.remote    
+        return self.remote
 
     def set_remote(self, on=True):
         """
