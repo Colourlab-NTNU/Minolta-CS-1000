@@ -23,12 +23,11 @@ import cs1000
 import sys
 import os
 import numpy as np
-import PyQt4.QtGui as qt
-import PyQt4.QtCore as qtcore
-from matplotlib.backends.backend_qt4agg \
+import PyQt5.QtWidgets as qt
+from matplotlib.backends.backend_qt5agg \
     import FigureCanvasQTAgg as FigureCanvas
-from matplotlib.backends.backend_qt4agg \
-    import NavigationToolbar2QTAgg as NavigationToolbar
+from matplotlib.backends.backend_qt5agg \
+    import NavigationToolbar2QT as NavigationToolbar
 from matplotlib.figure import Figure
 
 
@@ -242,7 +241,7 @@ along with this program.  If not, see
             action.setToolTip(tip)
             action.setStatusTip(tip)
         if slot is not None:
-            self.connect(action, qtcore.SIGNAL(signal), slot)
+            action.triggered.connect(slot)
         if checkable:
             action.setCheckable(True)
         return action
@@ -295,8 +294,7 @@ along with this program.  If not, see
 
         # Create check box to connect to CS-1000
         self.connect_check = qt.QCheckBox('Connect')
-        self.connect(self.connect_check,
-                     qtcore.SIGNAL('stateChanged(int)'), self.on_connect)
+        self.connect_check.pressed.connect(self.on_connect)
 
         # Name of the port
         port_name = \
@@ -320,8 +318,9 @@ along with this program.  If not, see
 
         # Create button for performing measurement:
         self.measure_button = qt.QPushButton('Measure')
-        self.connect(self.measure_button,
-                     qtcore.SIGNAL('clicked(bool)'), self.on_measure)
+        self.measure_button.clicked.connect(self.on_measure)
+#        self.connect(self.measure_button,
+#                     qtcore.SIGNAL('clicked(bool)'), self.on_measure)
 
         self.spd_table = qt.QTableWidget()
         self.colour_table = qt.QTableWidget()

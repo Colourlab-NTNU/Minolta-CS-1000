@@ -5,6 +5,7 @@
 .pydevprocect
 .settings
 doc
+venv/
 *.csv
 __pycache__
 *.pyc
