@@ -144,9 +144,7 @@ class AppForm(qt.QMainWindow):
     def on_save_spd(self):
         file_choices = "CSV (*.csv)|*.csv"
         suggest = 'spd.csv'
-        path = unicode(
-            qt.QFileDialog.getSaveFileName(
-                self, 'Save file', suggest, file_choices))
+        path = qt.QFileDialog.getSaveFileName(self, 'Save file', suggest, file_choices)[0]
         if path:
             self.statusBar().showMessage('Saved to %s' % path, 2000)
             np.savetxt(path, self.results['spectrum'], '%.0f, %.4e')
@@ -154,9 +152,7 @@ class AppForm(qt.QMainWindow):
     def on_save_colour(self):
         file_choices = "CSV (*.csv)|*.csv"
         suggest = 'colour.csv'
-        path = unicode(
-            qt.QFileDialog.getSaveFileName(
-                self, 'Save file', suggest, file_choices))
+        path = qt.QFileDialog.getSaveFileName(self, 'Save file', suggest, file_choices)[0]
         if path:
             self.statusBar().showMessage('Saved to %s' % path, 2000)
             f = open(path, 'w')
@@ -319,8 +315,6 @@ along with this program.  If not, see
         # Create button for performing measurement:
         self.measure_button = qt.QPushButton('Measure')
         self.measure_button.clicked.connect(self.on_measure)
-#        self.connect(self.measure_button,
-#                     qtcore.SIGNAL('clicked(bool)'), self.on_measure)
 
         self.spd_table = qt.QTableWidget()
         self.colour_table = qt.QTableWidget()
