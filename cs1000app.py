@@ -290,7 +290,7 @@ along with this program.  If not, see
 
         # Create check box to connect to CS-1000
         self.connect_check = qt.QCheckBox('Connect')
-        self.connect_check.pressed.connect(self.on_connect)
+        self.connect_check.clicked.connect(self.on_connect)
 
         # Name of the port
         port_name = \
